@@ -25,32 +25,66 @@ pv.Label.defaults = new pv.Label().extend(pv.Mark.defaults)
     .textBaseline("bottom")
     .textMargin(3);
 
-pv.Label.prototype.renderInstance = function(g, s) {
-  g.save();
-  g.font = s.font;
-
-  /* Horizontal alignment. */
-  var ox = 0;
-  switch (s.textAlign) {
-    case "center": ox += -g.measureText(s.text).width / 2; break;
-    case "right": ox += -g.measureText(s.text).width - s.textMargin; break;
-    case "left": ox += s.textMargin; break;
+pv.Label.prototype.updateInstance = function(s) {
+  var v = s.svg;
+  if (s.visible && !v) {
+    v = s.svg = document.createElementNS(pv.ns.svg, "text");
+    v.$text = document.createTextNode("");
+    v.appendChild(v.$text);
+    s.parent.svg.appendChild(v);
   }
 
-  /* Vertical alignment. */
-  var oy = 0;
-  function lineHeight(font) {
-    return Number(/[0-9]+/.exec(font)[0]) * .68;
-  }
+  pv.Mark.prototype.updateInstance.call(this, s);
+  if (!s.visible) return;
+
+  v.setAttribute("transform", "translate(" + s.left + "," + s.top + ")"
+      + (s.textAngle ? " rotate(" + 180 * s.textAngle / Math.PI + ")" : ""));
+
   switch (s.textBaseline) {
-    case "middle": oy += lineHeight(s.font) / 2; break;
-    case "top": oy += lineHeight(s.font) + s.textMargin; break;
-    case "bottom": oy -= s.textMargin; break;
+    case "middle": {
+      v.removeAttribute("y");
+      v.setAttribute("dy", ".4em");
+      break;
+    }
+    case "top": {
+      v.setAttribute("y", s.textMargin);
+      v.setAttribute("dy", ".8em");
+      break;
+    }
+    case "bottom": {
+      v.setAttribute("y", -s.textMargin);
+      v.removeAttribute("dy");
+      break;
+    }
   }
 
-  g.translate(s.left, s.top);
-  g.rotate(s.textAngle);
-  g.fillStyle = s.textStyle;
-  g.fillText(s.text, ox, oy);
-  g.restore();
+  switch (s.textAlign) {
+    case "right": {
+      v.setAttribute("text-anchor", "end");
+      v.setAttribute("x", -s.textMargin);
+      break;
+    }
+    case "center": {
+      v.setAttribute("text-anchor", "middle");
+      v.removeAttribute("x");
+      break;
+    }
+    case "left": {
+      v.setAttribute("text-anchor", "start");
+      v.setAttribute("x", s.textMargin);
+      break;
+    }
+  }
+
+  /* TODO centralize font definition? */
+  v.$text.nodeValue = s.text;
+  v.setAttribute("style", "font:" + s.font + ";");
+
+  /* TODO gradient, patterns? */
+  var fill = new pv.Style(s.textStyle);
+  v.setAttribute("fill", fill.color);
+  v.setAttribute("fill-opacity", fill.opacity);
+
+  /* TODO enable interaction on labels? centralize this definition? */
+  v.setAttribute("pointer-events", "none");
 };
