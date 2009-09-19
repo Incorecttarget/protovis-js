@@ -6,7 +6,7 @@
   <UserPref name="code" default_value=""/>
   <Content type="html">
 <![CDATA[
-<script type="text/javascript" src="http://protovis-js.googlecode.com/svn/trunk/releases/3.0/protovis-r3.0.js"></script>
+<script type="text/javascript" src="http://protovis-js.googlecode.com/svn/trunk/protovis-r3.0.js"></script>
 <script type="text/javascript">
 var viewport = gadgets.window.getViewportDimensions();
 pv.Panel.prototype.defaults
