@@ -21,15 +21,15 @@
 pv.Line = function() {
   pv.Mark.call(this);
 };
-pv.Line.prototype = pv.extend(pv.Mark);
-pv.Line.prototype.type = pv.Line;
 
-/**
- * Returns "line".
- *
- * @returns {string} "line".
- */
-pv.Line.toString = function() { return "line"; };
+pv.Line.prototype = pv.extend(pv.Mark)
+    .property("lineWidth")
+    .property("strokeStyle")
+    .property("fillStyle")
+    .property("segmented")
+    .property("interpolate");
+
+pv.Line.prototype.type = "line";
 
 /**
  * The width of stroked lines, in pixels; used in conjunction with
@@ -38,7 +38,6 @@ pv.Line.toString = function() { return "line"; };
  * @type number
  * @name pv.Line.prototype.lineWidth
  */
-pv.Line.prototype.defineProperty("lineWidth");
 
 /**
  * The style of stroked lines; used in conjunction with <tt>lineWidth</tt> to
@@ -48,7 +47,6 @@ pv.Line.prototype.defineProperty("lineWidth");
  * @name pv.Line.prototype.strokeStyle
  * @see pv.color
  */
-pv.Line.prototype.defineProperty("strokeStyle");
 
 /**
  * The line fill style; if non-null, the interior of the line is closed and
@@ -59,75 +57,65 @@ pv.Line.prototype.defineProperty("strokeStyle");
  * @name pv.Line.prototype.fillStyle
  * @see pv.color
  */
-pv.Line.prototype.defineProperty("fillStyle");
+
+/**
+ * Whether the line is segmented; whether variations in stroke style, line width
+ * and the other properties are treated as fixed. Rendering segmented lines is
+ * noticeably slower than non-segmented lines.
+ *
+ * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ *
+ * @type boolean
+ * @name pv.Line.prototype.segmented
+ */
+
+/**
+ * How to interpolate between values. Linear interpolation ("linear") is the
+ * default, producing a straight line between points. For piecewise constant
+ * functions (i.e., step functions), either "step-before" or "step-after" can be
+ * specified.
+ *
+ * <p>Note: this property is currently supported only on non-segmented lines.
+ *
+ * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ *
+ * @type string
+ * @name pv.Line.prototype.interpolate
+ */
 
 /**
  * Default properties for lines. By default, there is no fill and the stroke
- * style is a categorical color.
+ * style is a categorical color. The default interpolation is linear.
  *
  * @type pv.Line
  */
-pv.Line.defaults = new pv.Line().extend(pv.Mark.defaults)
+pv.Line.prototype.defaults = new pv.Line()
+    .extend(pv.Mark.prototype.defaults)
     .lineWidth(1.5)
-    .strokeStyle(pv.Colors.category10);
+    .strokeStyle(defaultStrokeStyle)
+    .interpolate("linear");
 
-/**
- * Override the default update implementation, since the line mark generates a
- * single graphical element rather than multiple distinct elements.
- */
-pv.Line.prototype.update = function() {
-  if (!this.scene.length) return;
+/** @private */
+var pv_Line_specials = {left:1, top:1, right:1, bottom:1, name:1};
 
-  /* visible */
-  var s = this.scene[0], v = s.svg;
-  if (s.visible) {
-
-    /* Create the svg:polyline element, if necessary. */
-    if (!v) {
-      v = s.svg = document.createElementNS(pv.ns.svg, "polyline");
-      s.parent.svg.appendChild(v);
-    }
-
-    /* left, top TODO allow points to be changed on events? */
-    var p = "";
-    for (var i = 0; i < this.scene.length; i++) {
-      var si = this.scene[i];
-      if (isNaN(si.left)) si.left = 0;
-      if (isNaN(si.top)) si.top = 0;
-      p += si.left + "," + si.top + " ";
-    }
-    v.setAttribute("points", p);
-
-    /* cursor, title, events, etc. */
-    this.updateInstance(s);
-    v.removeAttribute("display");
-  } else if (v) {
-    v.setAttribute("display", "none");
+/** @private */
+pv.Line.prototype.bind = function() {
+  pv.Mark.prototype.bind.call(this);
+  var binds = this.binds,
+      properties = binds.properties,
+      specials = binds.specials = [];
+  for (var i = 0, n = properties.length; i < n; i++) {
+    var p = properties[i];
+    if (p.name in pv_Line_specials) specials.push(p);
   }
 };
 
-/**
- * Updates the display for the (singleton) line instance. The line mark
- * generates a single graphical element rather than multiple distinct elements.
- *
- * <p>TODO Recompute points? For efficiency, the points are not recomputed, and
- * therefore cannot be updated automatically from event handlers without an
- * explicit call to rebuild the line.
- *
- * @param s a node in the scene graph; the instance of the mark to update.
- */
-pv.Line.prototype.updateInstance = function(s) {
-  var v = s.svg;
-
-  pv.Mark.prototype.updateInstance.call(this, s);
-  if (!s.visible) return;
-
-  /* fill, stroke TODO gradient, patterns */
-  var fill = pv.color(s.fillStyle);
-  v.setAttribute("fill", fill.color);
-  v.setAttribute("fill-opacity", fill.opacity);
-  var stroke = pv.color(s.strokeStyle);
-  v.setAttribute("stroke", stroke.color);
-  v.setAttribute("stroke-opacity", stroke.opacity);
-  v.setAttribute("stroke-width", s.lineWidth);
+/** @private */
+pv.Line.prototype.buildInstance = function(s) {
+  if (this.index && !this.scene[0].segmented) {
+    this.buildProperties(s, this.binds.specials);
+    this.buildImplied(s);
+  } else {
+    pv.Mark.prototype.buildInstance.call(this, s);
+  }
 };

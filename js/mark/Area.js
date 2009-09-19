@@ -22,15 +22,17 @@
 pv.Area = function() {
   pv.Mark.call(this);
 };
-pv.Area.prototype = pv.extend(pv.Mark);
-pv.Area.prototype.type = pv.Area;
 
-/**
- * Returns "area".
- *
- * @returns {string} "area".
- */
-pv.Area.toString = function() { return "area"; };
+pv.Area.prototype = pv.extend(pv.Mark)
+    .property("width")
+    .property("height")
+    .property("lineWidth")
+    .property("strokeStyle")
+    .property("fillStyle")
+    .property("segmented")
+    .property("interpolate");
+
+pv.Area.prototype.type = "area";
 
 /**
  * The width of a given span, in pixels; used for horizontal spans. If the width
@@ -41,7 +43,6 @@ pv.Area.toString = function() { return "area"; };
  * @type number
  * @name pv.Area.prototype.width
  */
-pv.Area.prototype.defineProperty("width");
 
 /**
  * The height of a given span, in pixels; used for vertical spans. If the height
@@ -52,7 +53,6 @@ pv.Area.prototype.defineProperty("width");
  * @type number
  * @name pv.Area.prototype.height
  */
-pv.Area.prototype.defineProperty("height");
 
 /**
  * The width of stroked lines, in pixels; used in conjunction with
@@ -61,12 +61,12 @@ pv.Area.prototype.defineProperty("height");
  * edge. The default value of this property is 1.5, but since the default stroke
  * style is null, area marks are not stroked by default.
  *
- * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ * <p>This property is <i>fixed</i> for non-segmented areas. See
+ * {@link pv.Mark}.
  *
  * @type number
  * @name pv.Area.prototype.lineWidth
  */
-pv.Area.prototype.defineProperty("lineWidth");
 
 /**
  * The style of stroked lines; used in conjunction with <tt>lineWidth</tt> to
@@ -74,26 +74,51 @@ pv.Area.prototype.defineProperty("lineWidth");
  * entire perimeter is stroked, rather than just one edge. The default value of
  * this property is null, meaning areas are not stroked by default.
  *
- * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ * <p>This property is <i>fixed</i> for non-segmented areas. See
+ * {@link pv.Mark}.
  *
  * @type string
  * @name pv.Area.prototype.strokeStyle
  * @see pv.color
  */
-pv.Area.prototype.defineProperty("strokeStyle");
 
 /**
  * The area fill style; if non-null, the interior of the polygon forming the
  * area is filled with the specified color. The default value of this property
  * is a categorical color.
  *
- * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ * <p>This property is <i>fixed</i> for non-segmented areas. See
+ * {@link pv.Mark}.
  *
  * @type string
  * @name pv.Area.prototype.fillStyle
  * @see pv.color
  */
-pv.Area.prototype.defineProperty("fillStyle");
+
+/**
+ * Whether the area is segmented; whether variations in fill style, stroke
+ * style, and the other properties are treated as fixed. Rendering segmented
+ * areas is noticeably slower than non-segmented areas.
+ *
+ * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ *
+ * @type boolean
+ * @name pv.Area.prototype.segmented
+ */
+
+/**
+ * How to interpolate between values. Linear interpolation ("linear") is the
+ * default, producing a straight line between points. For piecewise constant
+ * functions (i.e., step functions), either "step-before" or "step-after" can be
+ * specified.
+ *
+ * <p>Note: this property is currently supported only on non-segmented areas.
+ *
+ * <p>This property is <i>fixed</i>. See {@link pv.Mark}.
+ *
+ * @type string
+ * @name pv.Area.prototype.interpolate
+ */
 
 /**
  * Default properties for areas. By default, there is no stroke and the fill
@@ -101,15 +126,15 @@ pv.Area.prototype.defineProperty("fillStyle");
  *
  * @type pv.Area
  */
-pv.Area.defaults = new pv.Area().extend(pv.Mark.defaults)
+pv.Area.prototype.defaults = new pv.Area()
+    .extend(pv.Mark.prototype.defaults)
     .lineWidth(1.5)
-    .fillStyle(pv.Colors.category20);
+    .fillStyle(defaultFillStyle)
+    .interpolate("linear");
 
 /**
- * Constructs a new area anchor with default properties.
- *
- * @class Represents an anchor for an area mark. Areas support five different
- * anchors:<ul>
+ * Constructs a new area anchor with default properties. Areas support five
+ * different anchors:<ul>
  *
  * <li>top
  * <li>left
@@ -128,119 +153,71 @@ pv.Area.defaults = new pv.Area().extend(pv.Mark.defaults)
  * more robust to use panels and the cousin accessor to define stacked area
  * marks; see {@link pv.Mark#scene} for an example.
  *
- * @extends pv.Mark.Anchor
+ * @param {string} name the anchor name; either a string or a property function.
+ * @returns {pv.Anchor}
  */
-pv.Area.Anchor = function() {
-  pv.Mark.Anchor.call(this);
-};
-pv.Area.Anchor.prototype = pv.extend(pv.Mark.Anchor);
-pv.Area.Anchor.prototype.type = pv.Area;
-
-/**
- * The left property; null for "left" anchors, non-null otherwise.
- *
- * @type number
- * @name pv.Area.Anchor.prototype.left
- */ /** @private */
-pv.Area.Anchor.prototype.$left = function() {
-  var area = this.anchorTarget();
-  switch (this.get("name")) {
-    case "bottom":
-    case "top":
-    case "center": return area.left() + area.width() / 2;
-    case "right": return area.left() + area.width();
-  }
-  return null;
-};
-
-/**
- * The right property; null for "right" anchors, non-null otherwise.
- *
- * @type number
- * @name pv.Area.Anchor.prototype.right
- */ /** @private */
-pv.Area.Anchor.prototype.$right = function() {
-  var area = this.anchorTarget();
-  switch (this.get("name")) {
-    case "bottom":
-    case "top":
-    case "center": return area.right() + area.width() / 2;
-    case "left": return area.right() + area.width();
-  }
-  return null;
-};
-
-/**
- * The top property; null for "top" anchors, non-null otherwise.
- *
- * @type number
- * @name pv.Area.Anchor.prototype.top
- */ /** @private */
-pv.Area.Anchor.prototype.$top = function() {
-  var area = this.anchorTarget();
-  switch (this.get("name")) {
-    case "left":
-    case "right":
-    case "center": return area.top() + area.height() / 2;
-    case "bottom": return area.top() + area.height();
-  }
-  return null;
-};
-
-/**
- * The bottom property; null for "bottom" anchors, non-null otherwise.
- *
- * @type number
- * @name pv.Area.Anchor.prototype.bottom
- */ /** @private */
-pv.Area.Anchor.prototype.$bottom = function() {
-  var area = this.anchorTarget();
-  switch (this.get("name")) {
-    case "left":
-    case "right":
-    case "center": return area.bottom() + area.height() / 2;
-    case "top": return area.bottom() + area.height();
-  }
-  return null;
+pv.Area.prototype.anchor = function(name) {
+  var area = this;
+  return pv.Mark.prototype.anchor.call(this, name)
+    .left(function() {
+        switch (this.name()) {
+          case "bottom":
+          case "top":
+          case "center": return area.left() + area.width() / 2;
+          case "right": return area.left() + area.width();
+        }
+        return null;
+      })
+    .right(function() {
+        switch (this.name()) {
+          case "bottom":
+          case "top":
+          case "center": return area.right() + area.width() / 2;
+          case "left": return area.right() + area.width();
+        }
+        return null;
+      })
+    .top(function() {
+        switch (this.name()) {
+          case "left":
+          case "right":
+          case "center": return area.top() + area.height() / 2;
+          case "bottom": return area.top() + area.height();
+        }
+        return null;
+      })
+    .bottom(function() {
+        switch (this.name()) {
+          case "left":
+          case "right":
+          case "center": return area.bottom() + area.height() / 2;
+          case "top": return area.bottom() + area.height();
+        }
+        return null;
+      })
+    .textAlign(function() {
+        switch (this.name()) {
+          case "bottom":
+          case "top":
+          case "center": return "center";
+          case "right": return "right";
+        }
+        return "left";
+      })
+    .textBaseline(function() {
+        switch (this.name()) {
+          case "right":
+          case "left":
+          case "center": return "middle";
+          case "top": return "top";
+        }
+        return "bottom";
+      });
 };
 
 /**
- * The text-align property, for horizontal alignment inside the area.
- *
- * @type string
- * @name pv.Area.Anchor.prototype.textAlign
- */ /** @private */
-pv.Area.Anchor.prototype.$textAlign = function() {
-  switch (this.get("name")) {
-    case "left": return "left";
-    case "bottom":
-    case "top":
-    case "center": return "center";
-    case "right": return "right";
-  }
-  return null;
-};
-
-/**
- * The text-baseline property, for vertical alignment inside the area.
- *
- * @type string
- * @name pv.Area.Anchor.prototype.textBasline
- */ /** @private */
-pv.Area.Anchor.prototype.$textBaseline = function() {
-  switch (this.get("name")) {
-    case "right":
-    case "left":
-    case "center": return "middle";
-    case "top": return "top";
-    case "bottom": return "bottom";
-  }
-  return null;
-};
-
-/**
- * Overrides the default behavior of {@link pv.Mark#buildImplied} such that the
- * width and height are set to zero if null.
+ * @private Overrides the default behavior of {@link pv.Mark.buildImplied} such
+ * that the width and height are set to zero if null.
  *
  * @param s a node in the scene graph; the instance of the mark to build.
  */
@@ -250,60 +227,27 @@ pv.Area.prototype.buildImplied = function(s) {
   pv.Mark.prototype.buildImplied.call(this, s);
 };
 
-/**
- * Override the default update implementation, since the area mark generates a
- * single graphical element rather than multiple distinct elements.
- */
-pv.Area.prototype.update = function() {
-  if (!this.scene.length) return;
+/** @private */
+var pv_Area_specials = {left:1, top:1, right:1, bottom:1, width:1, height:1, name:1};
 
-  var s = this.scene[0], v = s.svg;
-  if (s.visible) {
-
-    /* Create the <svg:polygon> element, if necesary. */
-    if (!v) {
-      v = s.svg = document.createElementNS(pv.ns.svg, "polygon");
-      s.parent.svg.appendChild(v);
-    }
-
-    /* points */
-    var p = "";
-    for (var i = 0; i < this.scene.length; i++) {
-      var si = this.scene[i];
-      p += si.left + "," + si.top + " ";
-    }
-    for (var i = this.scene.length - 1; i >= 0; i--) {
-      var si = this.scene[i];
-      p += (si.left + si.width) + "," + (si.top + si.height) + " ";
-    }
-    v.setAttribute("points", p);
+/** @private */
+pv.Area.prototype.bind = function() {
+  pv.Mark.prototype.bind.call(this);
+  var binds = this.binds,
+      properties = binds.properties,
+      specials = binds.specials = [];
+  for (var i = 0, n = properties.length; i < n; i++) {
+    var p = properties[i];
+    if (p.name in pv_Area_specials) specials.push(p);
   }
-
-  this.updateInstance(s);
 };
 
-/**
- * Updates the display for the (singleton) area instance. The area mark
- * generates a single graphical element rather than multiple distinct elements.
- *
- * <p>TODO Recompute points? For efficiency, the points (the span positions) are
- * not recomputed, and therefore cannot be updated automatically from event
- * handlers without an explicit call to rebuild the area.
- *
- * @param s a node in the scene graph; the area to update.
- */
-pv.Area.prototype.updateInstance = function(s) {
-  var v = s.svg;
-
-  pv.Mark.prototype.updateInstance.call(this, s);
-  if (!s.visible) return;
-
-  /* fill, stroke TODO gradient, patterns */
-  var fill = pv.color(s.fillStyle);
-  v.setAttribute("fill", fill.color);
-  v.setAttribute("fill-opacity", fill.opacity);
-  var stroke = pv.color(s.strokeStyle);
-  v.setAttribute("stroke", stroke.color);
-  v.setAttribute("stroke-opacity", stroke.opacity);
-  v.setAttribute("stroke-width", s.lineWidth);
+/** @private */
+pv.Area.prototype.buildInstance = function(s) {
+  if (this.index && !this.scene[0].segmented) {
+    this.buildProperties(s, this.binds.specials);
+    this.buildImplied(s);
+  } else {
+    pv.Mark.prototype.buildInstance.call(this, s);
+  }
 };

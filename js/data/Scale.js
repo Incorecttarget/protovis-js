@@ -1,54 +1,36 @@
-pv.Scale = {};
+// TODO code-sharing between scales
 
-pv.Scale.linear = function() {
-  var min, max, nice = false, s, f = pv.identity;
+/**
+ * @ignore
+ * @class
+ */
+pv.Scale = function() {};
 
-  /* Property function. */
-  function scale() {
-    if (s == undefined) {
-      if (min == undefined) min = pv.min(this.$$data, f);
-      if (max == undefined) max = pv.max(this.$$data, f);
-      if (nice) { // TODO Only "nice" bounds set automatically.
-        var step = Math.pow(10, Math.round(Math.log(max - min) / Math.log(10)) - 1);
-        min = Math.floor(min / step) * step;
-        max = Math.ceil(max / step) * step;
-      }
-      s = range.call(this) / (max - min);
-    }
-    return (f.apply(this, arguments) - min) * s;
+/**
+ * @private Returns a function that interpolators from the start value to the
+ * end value, given a parameter <i>t</i> in [0, 1].
+ *
+ * @param start the start value.
+ * @param end the end value.
+ */
+pv.Scale.interpolator = function(start, end) {
+  if (typeof start == "number") {
+    return function(t) {
+      return t * (end - start) + start;
+    };
   }
 
-  function range() {
-    switch (property) {
-      case "height":
-      case "top":
-      case "bottom": return this.parent.height();
-      case "width":
-      case "left":
-      case "right": return this.parent.width();
-      default: return 1;
-    }
-  }
-
-  scale.by = function(v) { f = v; return this; };
-  scale.min = function(v) { min = v; return this; };
-  scale.max = function(v) { max = v; return this; };
-
-  scale.nice = function(v) {
-    nice = (arguments.length == 0) ? true : v;
-    return this;
+  /* For now, assume color. */
+  start = pv.color(start).rgb();
+  end = pv.color(end).rgb();
+  return function(t) {
+    var a = start.a * (1 - t) + end.a * t;
+    if (a < 1e-5) a = 0; // avoid scientific notation
+    return (start.a == 0) ? pv.rgb(end.r, end.g, end.b, a)
+        : ((end.a == 0) ? pv.rgb(start.r, start.g, start.b, a)
+        : pv.rgb(
+            Math.round(start.r * (1 - t) + end.r * t),
+            Math.round(start.g * (1 - t) + end.g * t),
+            Math.round(start.b * (1 - t) + end.b * t), a));
   };
-
-  scale.range = function() {
-    if (arguments.length == 1) {
-      o = 0;
-      s = arguments[0];
-    } else {
-      o = arguments[0];
-      s = arguments[1] - arguments[0];
-    }
-    return this;
-  };
-
-  return scale;
 };

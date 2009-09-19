@@ -21,15 +21,18 @@
 pv.Wedge = function() {
   pv.Mark.call(this);
 };
-pv.Wedge.prototype = pv.extend(pv.Mark);
-pv.Wedge.prototype.type = pv.Wedge;
 
-/**
- * Returns "wedge".
- *
- * @returns {string} "wedge".
- */
-pv.Wedge.toString = function() { return "wedge"; };
+pv.Wedge.prototype = pv.extend(pv.Mark)
+    .property("startAngle")
+    .property("endAngle")
+    .property("angle")
+    .property("innerRadius")
+    .property("outerRadius")
+    .property("lineWidth")
+    .property("strokeStyle")
+    .property("fillStyle");
+
+pv.Wedge.prototype.type = "wedge";
 
 /**
  * The start angle of the wedge, in radians. The start angle is measured
@@ -41,7 +44,6 @@ pv.Wedge.toString = function() { return "wedge"; };
  * @type number
  * @name pv.Wedge.prototype.startAngle
  */
-pv.Wedge.prototype.defineProperty("startAngle");
 
 /**
  * The end angle of the wedge, in radians. If not specified, the end angle is
@@ -50,7 +52,6 @@ pv.Wedge.prototype.defineProperty("startAngle");
  * @type number
  * @name pv.Wedge.prototype.endAngle
  */
-pv.Wedge.prototype.defineProperty("endAngle");
 
 /**
  * The angular span of the wedge, in radians. This property is used if end angle
@@ -59,7 +60,6 @@ pv.Wedge.prototype.defineProperty("endAngle");
  * @type number
  * @name pv.Wedge.prototype.angle
  */
-pv.Wedge.prototype.defineProperty("angle");
 
 /**
  * The inner radius of the wedge, in pixels. The default value of this property
@@ -69,7 +69,6 @@ pv.Wedge.prototype.defineProperty("angle");
  * @type number
  * @name pv.Wedge.prototype.innerRadius
  */
-pv.Wedge.prototype.defineProperty("innerRadius");
 
 /**
  * The outer radius of the wedge, in pixels. This property is required. For
@@ -79,7 +78,6 @@ pv.Wedge.prototype.defineProperty("innerRadius");
  * @type number
  * @name pv.Wedge.prototype.outerRadius
  */
-pv.Wedge.prototype.defineProperty("outerRadius");
 
 /**
  * The width of stroked lines, in pixels; used in conjunction with
@@ -88,7 +86,6 @@ pv.Wedge.prototype.defineProperty("outerRadius");
  * @type number
  * @name pv.Wedge.prototype.lineWidth
  */
-pv.Wedge.prototype.defineProperty("lineWidth");
 
 /**
  * The style of stroked lines; used in conjunction with <tt>lineWidth</tt> to
@@ -99,7 +96,6 @@ pv.Wedge.prototype.defineProperty("lineWidth");
  * @name pv.Wedge.prototype.strokeStyle
  * @see pv.color
  */
-pv.Wedge.prototype.defineProperty("strokeStyle");
 
 /**
  * The wedge fill style; if non-null, the interior of the wedge is filled with
@@ -110,7 +106,6 @@ pv.Wedge.prototype.defineProperty("strokeStyle");
  * @name pv.Wedge.prototype.fillStyle
  * @see pv.color
  */
-pv.Wedge.prototype.defineProperty("fillStyle");
 
 /**
  * Default properties for wedges. By default, there is no stroke and the fill
@@ -118,7 +113,8 @@ pv.Wedge.prototype.defineProperty("fillStyle");
  *
  * @type pv.Wedge
  */
-pv.Wedge.defaults = new pv.Wedge().extend(pv.Mark.defaults)
+pv.Wedge.prototype.defaults = new pv.Wedge()
+    .extend(pv.Mark.prototype.defaults)
     .startAngle(function() {
         var s = this.sibling();
         return s ? s.endAngle : -Math.PI / 2;
@@ -126,7 +122,7 @@ pv.Wedge.defaults = new pv.Wedge().extend(pv.Mark.defaults)
     .innerRadius(0)
     .lineWidth(1.5)
     .strokeStyle(null)
-    .fillStyle(pv.Colors.category20.unique);
+    .fillStyle(defaultFillStyle.by(pv.index));
 
 /**
  * Returns the mid-radius of the wedge, which is defined as half-way between the
@@ -153,10 +149,8 @@ pv.Wedge.prototype.midAngle = function() {
 };
 
 /**
- * Constructs a new wedge anchor with default properties.
- *
- * @class Represents an anchor for a wedge mark. Wedges support five different
- * anchors:<ul>
+ * Constructs a new wedge anchor with default properties. Wedges support five
+ * different anchors:<ul>
  *
  * <li>outer
  * <li>inner
@@ -168,133 +162,73 @@ pv.Wedge.prototype.midAngle = function() {
  * anchors support text rendering properties (text-align, text-baseline,
  * textAngle). Text is rendered to appear inside the wedge.
  *
- * @extends pv.Mark.Anchor
+ * @param {string} name the anchor name; either a string or a property function.
+ * @returns {pv.Anchor}
  */
-pv.Wedge.Anchor = function() {
-  pv.Mark.Anchor.call(this);
-};
-pv.Wedge.Anchor.prototype = pv.extend(pv.Mark.Anchor);
-pv.Wedge.Anchor.prototype.type = pv.Wedge;
-
-/**
- * The left property; non-null.
- *
- * @type number
- * @name pv.Wedge.Anchor.prototype.left
- */ /** @private */
-pv.Wedge.Anchor.prototype.$left = function() {
-  var w = this.anchorTarget();
-  switch (this.get("name")) {
-    case "outer": return w.left() + w.outerRadius() * Math.cos(w.midAngle());
-    case "inner": return w.left() + w.innerRadius() * Math.cos(w.midAngle());
-    case "start": return w.left() + w.midRadius() * Math.cos(w.startAngle());
-    case "center": return w.left() + w.midRadius() * Math.cos(w.midAngle());
-    case "end": return w.left() + w.midRadius() * Math.cos(w.endAngle());
-  }
-  return null;
-};
-
-/**
- * The right property; non-null.
- *
- * @type number
- * @name pv.Wedge.Anchor.prototype.right
- */ /** @private */
-pv.Wedge.Anchor.prototype.$right = function() {
-  var w = this.anchorTarget();
-  switch (this.get("name")) {
-    case "outer": return w.right() + w.outerRadius() * Math.cos(w.midAngle());
-    case "inner": return w.right() + w.innerRadius() * Math.cos(w.midAngle());
-    case "start": return w.right() + w.midRadius() * Math.cos(w.startAngle());
-    case "center": return w.right() + w.midRadius() * Math.cos(w.midAngle());
-    case "end": return w.right() + w.midRadius() * Math.cos(w.endAngle());
-  }
-  return null;
-};
-
-/**
- * The top property; non-null.
- *
- * @type number
- * @name pv.Wedge.Anchor.prototype.top
- */ /** @private */
-pv.Wedge.Anchor.prototype.$top = function() {
-  var w = this.anchorTarget();
-  switch (this.get("name")) {
-    case "outer": return w.top() + w.outerRadius() * Math.sin(w.midAngle());
-    case "inner": return w.top() + w.innerRadius() * Math.sin(w.midAngle());
-    case "start": return w.top() + w.midRadius() * Math.sin(w.startAngle());
-    case "center": return w.top() + w.midRadius() * Math.sin(w.midAngle());
-    case "end": return w.top() + w.midRadius() * Math.sin(w.endAngle());
-  }
-  return null;
-};
-
-/**
- * The bottom property; non-null.
- *
- * @type number
- * @name pv.Wedge.Anchor.prototype.bottom
- */ /** @private */
-pv.Wedge.Anchor.prototype.$bottom = function() {
-  var w = this.anchorTarget();
-  switch (this.get("name")) {
-    case "outer": return w.bottom() + w.outerRadius() * Math.sin(w.midAngle());
-    case "inner": return w.bottom() + w.innerRadius() * Math.sin(w.midAngle());
-    case "start": return w.bottom() + w.midRadius() * Math.sin(w.startAngle());
-    case "center": return w.bottom() + w.midRadius() * Math.sin(w.midAngle());
-    case "end": return w.bottom() + w.midRadius() * Math.sin(w.endAngle());
-  }
-  return null;
-};
-
-/**
- * The text-align property, for horizontal alignment inside the wedge.
- *
- * @type string
- * @name pv.Wedge.Anchor.prototype.textAlign
- */ /** @private */
-pv.Wedge.Anchor.prototype.$textAlign = function() {
-  var w = this.anchorTarget();
-  switch (this.get("name")) {
-    case "outer": return pv.Wedge.upright(w.midAngle()) ? "right" : "left";
-    case "inner": return pv.Wedge.upright(w.midAngle()) ? "left" : "right";
-    default: return "center";
-  }
-};
-
-/**
- * The text-baseline property, for vertical alignment inside the wedge.
- *
- * @type string
- * @name pv.Wedge.Anchor.prototype.textBaseline
- */ /** @private */
-pv.Wedge.Anchor.prototype.$textBaseline = function() {
-  var w = this.anchorTarget();
-  switch (this.get("name")) {
-    case "start": return pv.Wedge.upright(w.startAngle()) ? "top" : "bottom";
-    case "end": return pv.Wedge.upright(w.endAngle()) ? "bottom" : "top";
-    default: return "middle";
-  }
-};
-
-/**
- * The text-angle property, for text rotation inside the wedge.
- *
- * @type number
- * @name pv.Wedge.Anchor.prototype.textAngle
- */ /** @private */
-pv.Wedge.Anchor.prototype.$textAngle = function() {
-  var w = this.anchorTarget();
-  var a = 0;
-  switch (this.get("name")) {
-    case "center":
-    case "inner":
-    case "outer": a = w.midAngle(); break;
-    case "start": a = w.startAngle(); break;
-    case "end": a = w.endAngle(); break;
-  }
-  return pv.Wedge.upright(a) ? a : (a + Math.PI);
+pv.Wedge.prototype.anchor = function(name) {
+  var w = this;
+  return pv.Mark.prototype.anchor.call(this, name)
+    .left(function() {
+        switch (this.name()) {
+          case "outer": return w.left() + w.outerRadius() * Math.cos(w.midAngle());
+          case "inner": return w.left() + w.innerRadius() * Math.cos(w.midAngle());
+          case "start": return w.left() + w.midRadius() * Math.cos(w.startAngle());
+          case "center": return w.left() + w.midRadius() * Math.cos(w.midAngle());
+          case "end": return w.left() + w.midRadius() * Math.cos(w.endAngle());
+        }
+      })
+    .right(function() {
+        switch (this.name()) {
+          case "outer": return w.right() + w.outerRadius() * Math.cos(w.midAngle());
+          case "inner": return w.right() + w.innerRadius() * Math.cos(w.midAngle());
+          case "start": return w.right() + w.midRadius() * Math.cos(w.startAngle());
+          case "center": return w.right() + w.midRadius() * Math.cos(w.midAngle());
+          case "end": return w.right() + w.midRadius() * Math.cos(w.endAngle());
+        }
+      })
+    .top(function() {
+        switch (this.name()) {
+          case "outer": return w.top() + w.outerRadius() * Math.sin(w.midAngle());
+          case "inner": return w.top() + w.innerRadius() * Math.sin(w.midAngle());
+          case "start": return w.top() + w.midRadius() * Math.sin(w.startAngle());
+          case "center": return w.top() + w.midRadius() * Math.sin(w.midAngle());
+          case "end": return w.top() + w.midRadius() * Math.sin(w.endAngle());
+        }
+      })
+    .bottom(function() {
+        switch (this.name()) {
+          case "outer": return w.bottom() + w.outerRadius() * Math.sin(w.midAngle());
+          case "inner": return w.bottom() + w.innerRadius() * Math.sin(w.midAngle());
+          case "start": return w.bottom() + w.midRadius() * Math.sin(w.startAngle());
+          case "center": return w.bottom() + w.midRadius() * Math.sin(w.midAngle());
+          case "end": return w.bottom() + w.midRadius() * Math.sin(w.endAngle());
+        }
+      })
+    .textAlign(function() {
+        switch (this.name()) {
+          case "outer": return pv.Wedge.upright(w.midAngle()) ? "right" : "left";
+          case "inner": return pv.Wedge.upright(w.midAngle()) ? "left" : "right";
+        }
+        return "center";
+      })
+    .textBaseline(function() {
+        switch (this.name()) {
+          case "start": return pv.Wedge.upright(w.startAngle()) ? "top" : "bottom";
+          case "end": return pv.Wedge.upright(w.endAngle()) ? "bottom" : "top";
+        }
+        return "middle";
+      })
+    .textAngle(function() {
+        var a = 0;
+        switch (this.name()) {
+          case "center":
+          case "inner":
+          case "outer": a = w.midAngle(); break;
+          case "start": a = w.startAngle(); break;
+          case "end": a = w.endAngle(); break;
+        }
+        return pv.Wedge.upright(a) ? a : (a + Math.PI);
+      });
 };
 
 /**
@@ -313,92 +247,20 @@ pv.Wedge.upright = function(angle) {
 };
 
 /**
- * Overrides the default behavior of {@link Mark#buildImplied} such that the end
- * angle is computed from the start angle and angle (angular span) if not
- * specified.
+ * @private Overrides the default behavior of {@link pv.Mark.buildImplied} such
+ * that the end angle is computed from the start angle and angle (angular span)
+ * if not specified.
  *
  * @param s a node in the scene graph; the instance of the wedge to build.
  */
 pv.Wedge.prototype.buildImplied = function(s) {
   pv.Mark.prototype.buildImplied.call(this, s);
-  if (s.endAngle == null) {
-    s.endAngle = s.startAngle + s.angle;
-  }
-};
-
-/**
- * Updates the display for the specified wedge instance <tt>s</tt> in the scene
- * graph. This implementation handles the fill and stroke style for the wedge,
- * as well as positional properties.
- *
- * @param s a node in the scene graph; the instance of the bar to update.
- */
-pv.Wedge.prototype.updateInstance = function(s) {
-  var v = s.svg;
-
-  /* Create the <svg:path> element, if necessary. */
-  if (s.visible && !v) {
-    v = s.svg = document.createElementNS(pv.ns.svg, "path");
-    v.setAttribute("fill-rule", "evenodd");
-    s.parent.svg.appendChild(v);
-  }
-
-  /* visible, cursor, title, events, etc. */
-  pv.Mark.prototype.updateInstance.call(this, s);
-  if (!s.visible) return;
-
-  /* left, top */
-  v.setAttribute("transform", "translate(" + s.left + "," + s.top +")");
 
   /*
    * TODO If the angle or endAngle is updated by an event handler, the implied
    * properties won't recompute correctly, so this will lead to potentially
    * buggy redraw. How to re-evaluate implied properties on update?
    */
-
-  /* innerRadius, outerRadius, startAngle, endAngle */
-  var r1 = s.innerRadius, r2 = s.outerRadius;
-  if (s.angle >= 2 * Math.PI) {
-    if (r1) {
-      v.setAttribute("d", "M0," + r2
-          + "A" + r2 + "," + r2 + " 0 1,1 0," + (-r2)
-          + "A" + r2 + "," + r2 + " 0 1,1 0," + r2
-          + "M0," + r1
-          + "A" + r1 + "," + r1 + " 0 1,1 0," + (-r1)
-          + "A" + r1 + "," + r1 + " 0 1,1 0," + r1
-          + "Z");
-    } else {
-      v.setAttribute("d", "M0," + r2
-          + "A" + r2 + "," + r2 + " 0 1,1 0," + (-r2)
-          + "A" + r2 + "," + r2 + " 0 1,1 0," + r2
-          + "Z");
-    }
-  } else {
-    var c1 = Math.cos(s.startAngle), c2 = Math.cos(s.endAngle),
-        s1 = Math.sin(s.startAngle), s2 = Math.sin(s.endAngle);
-    if (r1) {
-      v.setAttribute("d", "M" + r2 * c1 + "," + r2 * s1
-          + "A" + r2 + "," + r2 + " 0 "
-          + ((s.angle < Math.PI) ? "0" : "1") + ",1 "
-          + r2 * c2 + "," + r2 * s2
-          + "L" + r1 * c2 + "," + r1 * s2
-          + "A" + r1 + "," + r1 + " 0 "
-          + ((s.angle < Math.PI) ? "0" : "1") + ",0 "
-          + r1 * c1 + "," + r1 * s1 + "Z");
-    } else {
-      v.setAttribute("d", "M" + r2 * c1 + "," + r2 * s1
-          + "A" + r2 + "," + r2 + " 0 "
-          + ((s.angle < Math.PI) ? "0" : "1") + ",1 "
-          + r2 * c2 + "," + r2 * s2 + "L0,0Z");
-    }
-  }
-
-  /* fill, stroke TODO gradient, patterns */
-  var fill = pv.color(s.fillStyle);
-  v.setAttribute("fill", fill.color);
-  v.setAttribute("fill-opacity", fill.opacity);
-  var stroke = pv.color(s.strokeStyle);
-  v.setAttribute("stroke", stroke.color);
-  v.setAttribute("stroke-opacity", stroke.opacity);
-  v.setAttribute("stroke-width", s.lineWidth);
+  if (s.endAngle == null) s.endAngle = s.startAngle + s.angle;
+  if (s.angle == null) s.angle = s.endAngle - s.startAngle;
 };
