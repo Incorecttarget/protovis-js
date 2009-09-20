@@ -85,19 +85,19 @@ if (!Array.prototype.reduce) {
    */
   Array.prototype.reduce = function(f, v) {
       var len = this.length;
-      if (!len && (arguments.length == 2)) {
-        throw new Error();
+      if (!len && (arguments.length == 1)) {
+        throw new Error("reduce: empty array, no initial value");
       }
 
       var i = 0;
-      if (arguments.length < 3) {
+      if (arguments.length < 2) {
         while (true) {
           if (i in this) {
             v = this[i++];
             break;
           }
           if (++i >= len) {
-            throw new Error();
+            throw new Error("reduce: no values, no initial value");
           }
         }
       }
@@ -3492,15 +3492,15 @@ pv.SvgScene.create = function(type) {
  * @param s a scene node.
  */
 pv.SvgScene.title = function(e, s) {
-  var a = e.parentNode;
+  var a = e.parentNode, t = String(s.title);
   if (a && (a.tagName != "a")) a = null;
-  if (s.title) {
+  if (t) {
     if (!a) {
       a = this.create("a");
       if (e.parentNode) e.parentNode.replaceChild(a, e);
       a.appendChild(e);
     }
-    a.setAttributeNS(pv.ns.xlink, "title", s.title);
+    a.setAttributeNS(pv.ns.xlink, "title", t);
   } else if (a) {
     a.removeAttributeNS(pv.ns.xlink, "title");
   } else {
@@ -4950,7 +4950,7 @@ pv.Mark.prototype.build = function() {
   stack.shift();
   delete this.index;
   pv.Mark.prototype.index = -1;
-  if (!this.parent) delete scene.data;
+  if (!this.parent) scene.data = null;
 
   return this;
 };
@@ -5160,7 +5160,7 @@ pv.Mark.prototype.dispatch = function(type, scenes, index) {
     try {
       mark = l.apply(this, this.root.scene.data = argv(this));
     } finally {
-      delete this.root.scene.data;
+      this.root.scene.data = null;
     }
 
     /* Update the display. TODO dirtying. */
