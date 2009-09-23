@@ -17,11 +17,11 @@ var data = pv.range(3).map(function(i) {
 var w = 400,
     h = 200,
     x = pv.Scale.linear(0, 9.9).range(0, w),
-    y = pv.Scale.linear(0, 6).range(0, h);
+    y = pv.Scale.linear(0, 6).range(0, h)
+    i = -1;
 
 /* The root panel. */
 var vis = new pv.Panel()
-    .def("i", -1)
     .width(w)
     .height(h)
     .bottom(20)
@@ -60,8 +60,8 @@ var line = panel.add(pv.Line)
 
 /* The mouseover dots and label. */
 line.add(pv.Dot)
-    .visible(function() vis.i() >= 0)
-    .data(function(d) [d[vis.i()]])
+    .visible(function() i >= 0)
+    .data(function(d) [d[i]])
     .fillStyle(function() line.strokeStyle())
     .strokeStyle("#000")
     .size(20) 
@@ -75,10 +75,15 @@ line.add(pv.Dot)
 /* An invisible bar to capture events (without flickering). */
 vis.add(pv.Bar)
     .fillStyle("rgba(0,0,0,.001)")
-    .event("mouseout", function() vis.i(-1))
+    .event("mouseout", function() {
+        i = -1;
+        return vis;
+      })
     .event("mousemove", function() {
-        var i = pv.search(data[0].map(function(d) d.x), x.invert(vis.mouse().x));
-        return vis.i((i < 0) ? (-i - 2) : i);
+        var mx = x.invert(vis.mouse().x);
+        i = pv.search(data[0].map(function(d) d.x), mx);
+        i = i < 0 ? (-i - 2) : i;
+        return vis;
       });
 
 vis.render();
