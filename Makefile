@@ -56,15 +56,15 @@ JS_FILES = \
 	js/pv-end.js \
 	js/lang/init.js
 
-all: protovis-d3.0.js protovis-r3.0.js
+all: protovis-d3.1.js protovis-r3.1.js
 
-protovis-d3.0.js: $(JS_FILES) Makefile
+protovis-d3.1.js: $(JS_FILES) Makefile
 	grep '	' -Hn $(JS_FILES) && echo "ERROR: tab" && exit 1 || true
 	grep '' -Hn $(JS_FILES) && echo "ERROR: dos newline" && exit 1 || true
 	grep ' $$' -Hn $(JS_FILES) && echo "ERROR: trailing space" && exit 1 || true
 	cat $(JS_FILES) > $@
 
-protovis-r3.0.js: protovis-d3.0.js
+protovis-r3.1.js: protovis-d3.1.js
 	rm -f $@
 	cat $(JS_LANG_FILES) | java -jar lib/yuicompressor-2.4.2.jar --charset UTF-8 --type js >> $@
 	cat js/pv-start.js >> $@
@@ -73,5 +73,5 @@ protovis-r3.0.js: protovis-d3.0.js
 	cat js/lang/init.js | java -jar lib/yuicompressor-2.4.2.jar --charset UTF-8 --type js >> $@
 
 clean:
-	rm -rf protovis-d3.0.js protovis-r3.0.js
+	rm -rf protovis-d3.1.js protovis-r3.1.js
 
