@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -344,7 +344,7 @@ derived from data, you can use <a href="#nice">#nice</a> to round these values d
 up to even numbers.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/data_LinearScale.js.html">LinearScale.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/data_LinearScale.js.html">LinearScale.js</a>.
 				
 			</p>
 
@@ -439,6 +439,16 @@ evenly-rounded values.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pv.Scale.linear.html#tickFormat">tickFormat</a></b>(t)
+								</div>
+								<div class="description">Formats the specified tick value using the appropriate precision, based on
+the step interval between tick marks.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pv.Scale.linear.html#ticks">ticks</a></b>()
 								</div>
 								<div class="description">Returns an array of evenly-spaced, suitably-rounded values in the input
@@ -466,11 +476,11 @@ domain.</div>
 						<b>pv.Scale.linear</b>()
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					Returns a linear scale for the specified domain. The arguments to this
 constructor are optional, and equivalent to calling <a href="#domain">#domain</a>.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -520,7 +530,7 @@ constructor are optional, and equivalent to calling <a href="#domain">#domain</a
 					<b>by</b>(f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a view of this scale by the specified accessor function <tt>f</tt>.
 Given a scale <tt>y</tt>, <tt>y.by(function(d) d.foo)</tt> is equivalent to
 <tt>function(d) y(d.foo)</tt>.
@@ -540,7 +550,7 @@ This method should be used judiciously; it is typically more clear to
 invoke the scale directly, passing in the value to be scaled.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -580,7 +590,7 @@ function.</dd>
 					<b>domain</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Sets or gets the input domain. This method can be invoked several ways:
 
 <p>1. <tt>domain(min, ..., max)</tt>
@@ -621,7 +631,7 @@ if brevity is required.
 current domain as an array of numbers.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -660,7 +670,7 @@ current domain as an array of numbers.
 					<b>invert</b>(y)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Inverts the specified value in the output range, returning the
 corresponding value in the input domain. This is frequently used to convert
 the mouse location (see <a href="../symbols/pv.Mark.html#mouse">pv.Mark#mouse</a>) to a value in the input
@@ -672,7 +682,7 @@ should be rounded. If the specified <tt>y</tt> value is outside the range,
 the returned value may be equivalently outside the input domain.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -711,7 +721,7 @@ the returned value may be equivalently outside the input domain.
 					<b>nice</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						"Nices" this scale, extending the bounds of the input domain to
 evenly-rounded values. Nicing is useful if the domain is computed
 dynamically from data, and may be irregular. For example, given a domain of
@@ -721,7 +731,7 @@ extend the domain to [0.2, 1].
 <p>This method must be invoked each time after setting the domain.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -749,7 +759,7 @@ extend the domain to [0.2, 1].
 					<b>range</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Sets or gets the output range. This method can be invoked several ways:
 
 <p>1. <tt>range(min, ..., max)</tt>
@@ -772,7 +782,7 @@ the behavior of the scale is undefined.
 range as an array of numbers or colors.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -804,6 +814,50 @@ range as an array of numbers or colors.
 
 					<hr />
 				
+					<a name="tickFormat"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>tickFormat</b>(t)
+					
+					</div>
+					<div class="description">
+						Formats the specified tick value using the appropriate precision, based on
+the step interval between tick marks.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>t</b>
+									
+								</dt>
+								<dd>a tick value.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{string}</span> a formatted tick value.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="ticks"> </a>
 					<div class="fixedFont">
 					
@@ -811,14 +865,14 @@ range as an array of numbers or colors.
 					<b>ticks</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns an array of evenly-spaced, suitably-rounded values in the input
 domain. This method attempts to return between 5 and 10 tick values. These
 values are frequently used in conjunction with <a href="../symbols/pv.Rule.html">pv.Rule</a> to display
 tick marks or grid lines.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -851,7 +905,7 @@ tick marks or grid lines.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:36 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

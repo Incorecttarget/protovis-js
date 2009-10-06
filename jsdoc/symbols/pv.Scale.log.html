@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -346,7 +346,7 @@ derived from data, you can use <a href="#nice">#nice</a> to round these values d
 up to even numbers.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/data_LogScale.js.html">LogScale.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/data_LogScale.js.html">LogScale.js</a>.
 				
 			</p>
 
@@ -421,6 +421,15 @@ up to even numbers.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pv.Scale.log.html#invert">invert</a></b>()
+								</div>
+								<div class="description">Sets or gets the output range.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pv.Scale.log.html#nice">nice</a></b>()
 								</div>
 								<div class="description">"Nices" this scale, extending the bounds of the input domain to
@@ -433,7 +442,17 @@ evenly-rounded values.</div>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pv.Scale.log.html#range">range</a></b>()
 								</div>
-								<div class="description">Sets or gets the output range.</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pv.Scale.log.html#tickFormat">tickFormat</a></b>(t)
+								</div>
+								<div class="description">Formats the specified tick value using the appropriate precision, assuming
+base 10.</div>
 							</td>
 						</tr>
 					
@@ -467,11 +486,11 @@ domain.</div>
 						<b>pv.Scale.log</b>()
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					Returns a log scale for the specified domain. The arguments to this
 constructor are optional, and equivalent to calling <a href="#domain">#domain</a>.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -521,11 +540,11 @@ constructor are optional, and equivalent to calling <a href="#domain">#domain</a
 					<b>base</b>(v)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Sets or gets the logarithm base. Defaults to 10.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -564,7 +583,7 @@ constructor are optional, and equivalent to calling <a href="#domain">#domain</a
 					<b>by</b>(f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a view of this scale by the specified accessor function <tt>f</tt>.
 Given a scale <tt>y</tt>, <tt>y.by(function(d) d.foo)</tt> is equivalent to
 <tt>function(d) y(d.foo)</tt>.
@@ -584,7 +603,7 @@ This method should be used judiciously; it is typically more clear to
 invoke the scale directly, passing in the value to be scaled.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -624,7 +643,7 @@ function.</dd>
 					<b>domain</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Sets or gets the input domain. This method can be invoked several ways:
 
 <p>1. <tt>domain(min, ..., max)</tt>
@@ -665,7 +684,7 @@ if brevity is required.
 current domain as an array of numbers.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -697,54 +716,14 @@ current domain as an array of numbers.
 
 					<hr />
 				
-					<a name="nice"> </a>
+					<a name="invert"> </a>
 					<div class="fixedFont">
 					
 					<span class="light">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span>
-					<b>nice</b>()
+					<b>invert</b>()
 					
 					</div>
-					<p class="description">
-						"Nices" this scale, extending the bounds of the input domain to
-evenly-rounded values. This method uses <a href="../symbols/pv.html#.logFloor">pv.logFloor</a> and {@link
-pv.logCeil}. Nicing is useful if the domain is computed dynamically from
-data, and may be irregular. For example, given a domain of
-[0.20147987687960267, 0.996679553296417], a call to <tt>nice()</tt> might
-extend the domain to [0.1, 1].
-
-<p>This method must be invoked each time after setting the domain (and
-base).
-						
-						
-					</p>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span> <tt>this</tt>.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="range"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span>
-					<b>range</b>()
-					
-					</div>
-					<p class="description">
+					<div class="description">
 						Sets or gets the output range. This method can be invoked several ways:
 
 <p>1. <tt>range(min, ..., max)</tt>
@@ -767,7 +746,7 @@ the behavior of the scale is undefined.
 range as an array of numbers or colors.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -799,6 +778,133 @@ range as an array of numbers or colors.
 
 					<hr />
 				
+					<a name="nice"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span>
+					<b>nice</b>()
+					
+					</div>
+					<div class="description">
+						"Nices" this scale, extending the bounds of the input domain to
+evenly-rounded values. This method uses <a href="../symbols/pv.html#.logFloor">pv.logFloor</a> and {@link
+pv.logCeil}. Nicing is useful if the domain is computed dynamically from
+data, and may be irregular. For example, given a domain of
+[0.20147987687960267, 0.996679553296417], a call to <tt>nice()</tt> might
+extend the domain to [0.1, 1].
+
+<p>This method must be invoked each time after setting the domain (and
+base).
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span> <tt>this</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="range"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span>
+					<b>range</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{...}</span> <b>range...</b>
+									
+								</dt>
+								<dd>range values.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/pv.Scale.log.html">pv.Scale.log</a>}</span> <tt>this</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="tickFormat"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>tickFormat</b>(t)
+					
+					</div>
+					<div class="description">
+						Formats the specified tick value using the appropriate precision, assuming
+base 10.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>t</b>
+									
+								</dt>
+								<dd>a tick value.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{string}</span> a formatted tick value.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
 					<a name="ticks"> </a>
 					<div class="fixedFont">
 					
@@ -806,13 +912,13 @@ range as an array of numbers or colors.
 					<b>ticks</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns an array of evenly-spaced, suitably-rounded values in the input
 domain. These values are frequently used in conjunction with {@link
 pv.Rule} to display tick marks or grid lines.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -845,7 +951,7 @@ pv.Rule} to display tick marks or grid lines.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:36 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

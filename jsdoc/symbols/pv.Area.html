@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -276,8 +276,8 @@ ul.inheritsList
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
-				Extends
-					<a href="../symbols/pv.Mark.html">pv.Mark</a>.<p>
+				<br />Extends
+					<a href="../symbols/pv.Mark.html">pv.Mark</a>.<br />
 				
 			
 				Represents an area mark: the solid area between two series of
@@ -295,7 +295,7 @@ can be stroked and filled with arbitrary colors.
 <p>See also the <a href="../../api/Area.html">Area guide</a>.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/mark_Area.js.html">Area.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/mark_Area.js.html">Area.js</a>.
 				
 			</p>
 
@@ -479,12 +479,12 @@ stroke the perimeter of the area.</div>
 						<b>pv.Area</b>()
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					Constructs a new area mark with default properties. Areas are not typically
 constructed directly, but by adding to a panel or an existing mark via
 <a href="../symbols/pv.Mark.html#add">pv.Mark#add</a>.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -513,12 +513,12 @@ constructed directly, but by adding to a panel or an existing mark via
 					<b>defaults</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Default properties for areas. By default, there is no stroke and the fill
 style is a categorical color.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -536,7 +536,7 @@ style is a categorical color.
 					<b>fillStyle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The area fill style; if non-null, the interior of the polygon forming the
 area is filled with the specified color. The default value of this property
 is a categorical color.
@@ -545,7 +545,7 @@ is a categorical color.
 <a href="../symbols/pv.Mark.html">pv.Mark</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -570,14 +570,14 @@ is a categorical color.
 					<b>height</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The height of a given span, in pixels; used for vertical spans. If the height
 is specified, the width property should be 0 (the default). Either the left
 or right property should be used to space the spans horizontally, typically
 as a multiple of the index.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -595,7 +595,7 @@ as a multiple of the index.
 					<b>interpolate</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						How to interpolate between values. Linear interpolation ("linear") is the
 default, producing a straight line between points. For piecewise constant
 functions (i.e., step functions), either "step-before" or "step-after" can be
@@ -606,7 +606,7 @@ specified.
 <p>This property is <i>fixed</i>. See <a href="../symbols/pv.Mark.html">pv.Mark</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -624,7 +624,7 @@ specified.
 					<b>lineWidth</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The width of stroked lines, in pixels; used in conjunction with
 <tt>strokeStyle</tt> to stroke the perimeter of the area. Unlike the
 Line mark type, the entire perimeter is stroked, rather than just one
@@ -635,7 +635,7 @@ style is null, area marks are not stroked by default.
 <a href="../symbols/pv.Mark.html">pv.Mark</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -653,7 +653,7 @@ style is null, area marks are not stroked by default.
 					<b>segmented</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Whether the area is segmented; whether variations in fill style, stroke
 style, and the other properties are treated as fixed. Rendering segmented
 areas is noticeably slower than non-segmented areas.
@@ -661,7 +661,7 @@ areas is noticeably slower than non-segmented areas.
 <p>This property is <i>fixed</i>. See <a href="../symbols/pv.Mark.html">pv.Mark</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -679,7 +679,7 @@ areas is noticeably slower than non-segmented areas.
 					<b>strokeStyle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The style of stroked lines; used in conjunction with <tt>lineWidth</tt> to
 stroke the perimeter of the area. Unlike the Line mark type, the
 entire perimeter is stroked, rather than just one edge. The default value of
@@ -689,7 +689,7 @@ this property is null, meaning areas are not stroked by default.
 <a href="../symbols/pv.Mark.html">pv.Mark</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -714,14 +714,14 @@ this property is null, meaning areas are not stroked by default.
 					<b>width</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The width of a given span, in pixels; used for horizontal spans. If the width
 is specified, the height property should be 0 (the default). Either the top
 or bottom property should be used to space the spans vertically, typically as
 a multiple of the index.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -747,7 +747,7 @@ a multiple of the index.
 					<b>anchor</b>(name)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Constructs a new area anchor with default properties. Areas support five
 different anchors:<ul>
 
@@ -769,7 +769,7 @@ more robust to use panels and the cousin accessor to define stacked area
 marks; see <a href="../symbols/pv.Mark.html#scene">pv.Mark#scene</a> for an example.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -813,7 +813,7 @@ marks; see <a href="../symbols/pv.Mark.html#scene">pv.Mark#scene</a> for an exam
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:36 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

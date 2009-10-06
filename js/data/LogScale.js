@@ -189,7 +189,7 @@ pv.Scale.log = function() {
    * range as an array of numbers or colors.
    *
    * @function
-   * @name pv.Scale.log.prototype.range
+   * @name pv.Scale.log.prototype.invert
    * @param {...} range... range values.
    * @returns {pv.Scale.log} <tt>this</tt>, or the current range.
    */
@@ -198,7 +198,7 @@ pv.Scale.log = function() {
     if (j < 0) j = -j - 2;
     j = Math.max(0, Math.min(i.length - 1, j));
     var t = l[j] + (y - r[j]) / (r[j + 1] - r[j]) * (l[j + 1] - l[j]);
-    return (t < 0) ? -Math.pow(b, -t) : Math.pow(b, t);
+    return (d[j] < 0) ? -Math.pow(b, -t) : Math.pow(b, t);
   };
 
   /**
@@ -211,11 +211,13 @@ pv.Scale.log = function() {
    * @returns {number[]} an array input domain values to use as ticks.
    */
   scale.ticks = function() {
+    // TODO: support multiple domains
     var start = Math.floor(l[0]),
         end = Math.ceil(l[1]),
         ticks = [];
     for (var i = start; i < end; i++) {
       var x = Math.pow(b, i);
+      if (d[0] < 0) x = -x;
       for (var j = 1; j < b; j++) {
         ticks.push(x * j);
       }
@@ -224,6 +226,19 @@ pv.Scale.log = function() {
     if (ticks[0] < d[0]) ticks.shift();
     if (ticks[ticks.length - 1] > d[1]) ticks.pop();
     return ticks;
+  };
+
+  /**
+   * Formats the specified tick value using the appropriate precision, assuming
+   * base 10.
+   *
+   * @function
+   * @name pv.Scale.log.prototype.tickFormat
+   * @param {number} t a tick value.
+   * @return {string} a formatted tick value.
+   */
+  scale.tickFormat = function(t) {
+    return t.toPrecision(1);
   };
 
   /**
@@ -242,6 +257,7 @@ pv.Scale.log = function() {
    * @returns {pv.Scale.log} <tt>this</tt>.
    */
   scale.nice = function() {
+    // TODO: support multiple domains
     d = [pv.logFloor(d[0], b), pv.logCeil(d[1], b)];
     l = d.map(log);
     return this;

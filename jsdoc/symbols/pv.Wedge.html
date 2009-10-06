@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -276,8 +276,8 @@ ul.inheritsList
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
-				Extends
-					<a href="../symbols/pv.Mark.html">pv.Mark</a>.<p>
+				<br />Extends
+					<a href="../symbols/pv.Mark.html">pv.Mark</a>.<br />
 				
 			
 				Represents a wedge, or pie slice. Specified in terms of start and end
@@ -294,7 +294,7 @@ The wedge can be stroked and filled, similar to {link Bar}.
 <p>See also the <a href="../../api/Wedge.html">Wedge guide</a>.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/mark_Wedge.js.html">Wedge.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/mark_Wedge.js.html">Wedge.js</a>.
 				
 			</p>
 
@@ -517,12 +517,12 @@ rendered at that angle would appear upright.</div>
 						<b>pv.Wedge</b>()
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					Constructs a new wedge with default properties. Wedges are not typically
 constructed directly, but by adding to a panel or an existing mark via
 <a href="../symbols/pv.Mark.html#add">pv.Mark#add</a>.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -551,12 +551,12 @@ constructed directly, but by adding to a panel or an existing mark via
 					<b>angle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The angular span of the wedge, in radians. This property is used if end angle
 is not specified.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -574,12 +574,12 @@ is not specified.
 					<b>defaults</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Default properties for wedges. By default, there is no stroke and the fill
 style is a categorical color.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -597,12 +597,12 @@ style is a categorical color.
 					<b>endAngle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The end angle of the wedge, in radians. If not specified, the end angle is
 implied as the start angle plus the <a href="#angle">#angle</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -620,13 +620,13 @@ implied as the start angle plus the <a href="#angle">#angle</a>.
 					<b>fillStyle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The wedge fill style; if non-null, the interior of the wedge is filled with
 the specified color. The default value of this property is a categorical
 color.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -651,13 +651,13 @@ color.
 					<b>innerRadius</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The inner radius of the wedge, in pixels. The default value of this property
 is zero; a positive value will produce a donut slice rather than a pie slice.
 The inner radius can vary per-wedge.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -675,12 +675,12 @@ The inner radius can vary per-wedge.
 					<b>lineWidth</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The width of stroked lines, in pixels; used in conjunction with
 <tt>strokeStyle</tt> to stroke the wedge's border.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -698,13 +698,13 @@ The inner radius can vary per-wedge.
 					<b>outerRadius</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The outer radius of the wedge, in pixels. This property is required. For
 pies, only this radius is required; for donuts, the inner radius must be
 specified as well. The outer radius can vary per-wedge.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -722,7 +722,7 @@ specified as well. The outer radius can vary per-wedge.
 					<b>startAngle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The start angle of the wedge, in radians. The start angle is measured
 clockwise from the 3 o'clock position. The default value of this property is
 the end angle of the previous instance (the Mark#sibling), or -PI / 2
@@ -730,7 +730,7 @@ for the first wedge; for pie and donut charts, typically only the
 <a href="#angle">#angle</a> property needs to be specified.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -748,13 +748,13 @@ for the first wedge; for pie and donut charts, typically only the
 					<b>strokeStyle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The style of stroked lines; used in conjunction with <tt>lineWidth</tt> to
 stroke the wedge's border. The default value of this property is null,
 meaning wedges are not stroked by default.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -787,7 +787,7 @@ meaning wedges are not stroked by default.
 					<b>anchor</b>(name)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Constructs a new wedge anchor with default properties. Wedges support five
 different anchors:<ul>
 
@@ -802,7 +802,7 @@ anchors support text rendering properties (text-align, text-baseline,
 textAngle). Text is rendered to appear inside the wedge.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -841,12 +841,12 @@ textAngle). Text is rendered to appear inside the wedge.
 					<b>midAngle</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the mid-angle of the wedge, which is defined as half-way between the
 start and end angles.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -883,12 +883,12 @@ start and end angles.
 					<b>midRadius</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the mid-radius of the wedge, which is defined as half-way between the
 inner and outer radii.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -925,14 +925,14 @@ inner and outer radii.
 					<span class="light">pv.Wedge.</span><b>upright</b>(angle)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns true if the specified angle is considered "upright", as in, text
 rendered at that angle would appear upright. If the angle is not upright,
 text is rotated 180 degrees to be upright, and the text alignment properties
 are correspondingly changed.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -976,7 +976,7 @@ are correspondingly changed.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:37 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

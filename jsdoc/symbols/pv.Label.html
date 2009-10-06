@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -276,8 +276,8 @@ ul.inheritsList
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
-				Extends
-					<a href="../symbols/pv.Mark.html">pv.Mark</a>.<p>
+				<br />Extends
+					<a href="../symbols/pv.Mark.html">pv.Mark</a>.<br />
 				
 			
 				Represents a text label, allowing textual annotation of other marks or
@@ -299,7 +299,7 @@ on labels.
 <p>See also the <a href="../../api/Label.html">Label guide</a>.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/mark_Label.js.html">Label.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/mark_Label.js.html">Label.js</a>.
 				
 			</p>
 
@@ -469,12 +469,12 @@ text-shadow property.</div>
 						<b>pv.Label</b>()
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					Constructs a new label mark with default properties. Labels are not typically
 constructed directly, but by adding to a panel or an existing mark via
 <a href="../symbols/pv.Mark.html#add">pv.Mark#add</a>.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -503,12 +503,12 @@ constructed directly, but by adding to a panel or an existing mark via
 					<b>defaults</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Default properties for labels. See the individual properties for the default
 values.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -526,7 +526,7 @@ values.
 					<b>font</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The font format, per the CSS Level 2 specification. The default font is "10px
 sans-serif", for consistency with the HTML 5 canvas element specification.
 Note that since text is not wrapped, any line-height property will be
@@ -534,7 +534,7 @@ ignored. The other font-style, font-variant, font-weight, font-size and
 font-family properties are supported.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -559,13 +559,13 @@ font-family properties are supported.
 					<b>text</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The character data to render; a string. The default value of the text
 property is the identity function, meaning the label's associated datum will
 be rendered using its <tt>toString</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -583,7 +583,7 @@ be rendered using its <tt>toString</tt>.
 					<b>textAlign</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The horizontal text alignment. One of:<ul>
 
 <li>left
@@ -593,7 +593,7 @@ be rendered using its <tt>toString</tt>.
 </ul>The default horizontal alignment is left.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -611,13 +611,13 @@ be rendered using its <tt>toString</tt>.
 					<b>textAngle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The rotation angle, in radians. Text is rotated clockwise relative to the
 anchor location. For example, with the default left alignment, an angle of
 Math.PI / 2 causes text to proceed downwards. The default angle is zero.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -635,7 +635,7 @@ Math.PI / 2 causes text to proceed downwards. The default angle is zero.
 					<b>textBaseline</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The vertical text alignment. One of:<ul>
 
 <li>top
@@ -645,7 +645,7 @@ Math.PI / 2 causes text to proceed downwards. The default angle is zero.
 </ul>The default vertical alignment is bottom.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -663,7 +663,7 @@ Math.PI / 2 causes text to proceed downwards. The default angle is zero.
 					<b>textMargin</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The text margin; may be specified in pixels, or in font-dependent units (such
 as ".1ex"). The margin can be used to pad text away from its anchor location,
 in a direction dependent on the horizontal and vertical alignment
@@ -671,7 +671,7 @@ properties. For example, if the text is left- and middle-aligned, the margin
 shifts the text to the right. The default margin is 3 pixels.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -689,14 +689,14 @@ shifts the text to the right. The default margin is 3 pixels.
 					<b>textShadow</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						A list of shadow effects to be applied to text, per the CSS Text Level 3
 text-shadow property. An example specification is "0.1em 0.1em 0.1em
 rgba(0,0,0,.5)"; the first length is the horizontal offset, the second the
 vertical offset, and the third the blur radius.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -721,13 +721,13 @@ vertical offset, and the third the blur radius.
 					<b>textStyle</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The text color. The name "textStyle" is used for consistency with "fillStyle"
 and "strokeStyle", although it might be better to rename this property (and
 perhaps use the same name as "strokeStyle"). The default color is black.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -760,7 +760,7 @@ perhaps use the same name as "strokeStyle"). The default color is black.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:36 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

@@ -22,7 +22,7 @@ pv.SvgScene.updateAll = function(scenes) {
     }
     scenes = reversed;
   }
-  this[scenes.type](scenes);
+  this.removeSiblings(this[scenes.type](scenes));
 };
 
 /**
@@ -33,6 +33,31 @@ pv.SvgScene.updateAll = function(scenes) {
  */
 pv.SvgScene.create = function(type) {
   return document.createElementNS(pv.ns.svg, type);
+};
+
+/**
+ * Expects the element <i>e</i> to be the specified type. If the element does
+ * not exist, a new one is created. If the element does exist but is the wrong
+ * type, it is replaced with the specified element.
+ *
+ * @param type {string} an SVG element type, such as "rect".
+ * @return a new SVG element.
+ */
+pv.SvgScene.expect = function(type, e) {
+  if (!e) return this.create(type);
+  if (e.tagName == "a") e = e.firstChild;
+  if (e.tagName == type) return e;
+  var n = this.create(type);
+  e.parentNode.replaceChild(n, e);
+  return n;
+};
+
+/** TODO */
+pv.SvgScene.append = function(e, scenes, index) {
+  e.$scene = {scenes:scenes, index:index};
+  e = this.title(e, scenes[index]);
+  if (!e.parentNode) scenes.$g.appendChild(e);
+  return e.nextSibling;
 };
 
 /**
@@ -47,77 +72,35 @@ pv.SvgScene.create = function(type) {
  * @param s a scene node.
  */
 pv.SvgScene.title = function(e, s) {
-  var a = e.parentNode;
+  var a = e.parentNode, t = String(s.title);
   if (a && (a.tagName != "a")) a = null;
-  if (s.title) {
+  if (t) {
     if (!a) {
       a = this.create("a");
       if (e.parentNode) e.parentNode.replaceChild(a, e);
       a.appendChild(e);
     }
-    a.setAttributeNS(pv.ns.xlink, "title", s.title);
-  } else if (a) {
-    a.removeAttributeNS(pv.ns.xlink, "title");
-  } else {
-    a = e;
+    a.setAttributeNS(pv.ns.xlink, "title", t);
+    return a;
   }
-  return a;
+  if (a) a.parentNode.replaceChild(e, a);
+  return e;
 };
-
-/** TODO */
-pv.SvgScene.parentNode = function(scenes) {
-  return scenes.parent[scenes.parentIndex].scene.g;
-};
-
-/** TODO */
-pv.SvgScene.cache = function(s, type, name) {
-  if (!s.scene) return (s.scene = {})[name] = this.create(type);
-  var e = s.scene[name];
-  if (e) {
-    while (e.lastChild) e.removeChild(e.lastChild);
-    return e;
-  }
-  return s.scene[name] = this.create(type);
-};
-
-/** TODO */
-pv.SvgScene.group = function(scenes) {
-  var g = this.cache(scenes, "g", "g");
-  if (!g.parentNode) this.parentNode(scenes).appendChild(g);
-  return g;
-};
-
-/** TODO */
-pv.SvgScene.listen = function(e, scenes, index) {
-  e.$scene = {scenes:scenes, index:index};
-};
-
-var pv_SvgScene_mouseover;
 
 /** TODO */
 pv.SvgScene.dispatch = function(e) {
-  var t;
-
-  /*
-   * Firefox doesn't track the mouseout target very well, so here we do some
-   * bookkeeping to ensure that when a mouseover event triggers, the previous
-   * mouseover target gets a mouseout event.
-   */
-  if (pv_SvgScene_mouseover) {
-    t = pv_SvgScene_mouseover;
-    if (e.type == "mouseover") {
-      t.scenes.mark.dispatch("mouseout", t.scenes, t.index);
-      t = e.target.$scene;
-    } else if (e.type == "mouseout") {
-      pv_SvgScene_mouseover = null;
-    }
-  } else {
-    t = e.target.$scene;
-  }
-
+  var t = e.target.$scene;
   if (t) {
-    if (e.type == "mouseover") pv_SvgScene_mouseover = t;
     t.scenes.mark.dispatch(e.type, t.scenes, t.index);
     e.preventDefault();
+  }
+};
+
+/** TODO */
+pv.SvgScene.removeSiblings = function(e) {
+  while (e) {
+    var n = e.nextSibling;
+    e.parentNode.removeChild(e);
+    e = n;
   }
 };

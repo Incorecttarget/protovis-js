@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -333,7 +333,7 @@ property varies between panels or is dynamically generated.
 <p>See also the <a href="../../api/">Protovis guide</a>.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/mark_Mark.js.html">Mark.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/mark_Mark.js.html">Mark.js</a>.
 				
 			</p>
 
@@ -708,12 +708,12 @@ this is the first instance.</div>
 						<b>pv.Mark</b>()
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					Constructs a new mark with default properties. Marks, with the exception of
 the root panel, are not typically constructed directly; instead, they are
 added to a panel or an existing mark via <a href="../symbols/pv.Mark.html#add">pv.Mark#add</a>.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -742,14 +742,14 @@ added to a panel or an existing mark via <a href="../symbols/pv.Mark.html#add">p
 					<b>bottom</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The bottom margin; the distance, in pixels, between the bottom edge of the
 enclosing panel and the bottom edge of this mark. Note that in some cases
 this property may be redundant with the top property, or with the conjunction
 of top and height.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -767,12 +767,12 @@ of top and height.
 					<b>childIndex</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The child index. -1 if the enclosing parent panel is null; otherwise, the
 zero-based index of this mark into the parent panel's <tt>children</tt> array.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -790,12 +790,12 @@ zero-based index of this mark into the parent panel's <tt>children</tt> array.
 					<b>cursor</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The cursor property; corresponds to the CSS cursor property. This is
 typically used in conjunction with event handlers to indicate interactivity.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -820,7 +820,7 @@ typically used in conjunction with event handlers to indicate interactivity.
 					<b>data</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The data property; an array of objects. The size of the array determines the
 number of marks that will be instantiated; each element in the array will be
 passed to property functions to compute the property values. Typically, the
@@ -835,7 +835,7 @@ area graph example (see <a href="#scene">#scene</a>), the data function on the a
 dereferences each series.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -853,7 +853,7 @@ dereferences each series.
 					<b>defaults</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Default properties for all mark types. By default, the data array is the
 parent data as a single-element array; if the data property is not specified,
 this causes each mark to be instantiated as a singleton with the parents
@@ -861,7 +861,7 @@ datum. The visible property is true by default, and the reverse property is
 false.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -879,14 +879,14 @@ false.
 					<b>index</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The mark index. The value of this field depends on which instance (i.e.,
 which element of the data array) is currently being evaluated. During the
 build phase, the index is incremented over each datum; when handling events,
 the index is set to the instance that triggered the event.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -904,14 +904,14 @@ the index is set to the instance that triggered the event.
 					<b>left</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The left margin; the distance, in pixels, between the left edge of the
 enclosing panel and the left edge of this mark. Note that in some cases this
 property may be redundant with the right property, or with the conjunction of
 right and width.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -929,13 +929,13 @@ right and width.
 					<b>parent</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The enclosing parent panel. The parent panel is generally undefined only for
 the root panel; however, it is possible to create "offscreen" marks that are
 used only for inheritance purposes.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -953,14 +953,14 @@ used only for inheritance purposes.
 					<b>proto</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The mark prototype, possibly undefined, from which to inherit property
 functions. The mark prototype is not necessarily of the same type as this
 mark. Any properties defined on this mark will override properties inherited
 either from the prototype or from the type-specific defaults.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -978,7 +978,7 @@ either from the prototype or from the type-specific defaults.
 					<b>reverse</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The reverse property; a boolean determining whether marks are ordered from
 front-to-back or back-to-front. SVG does not support explicit z-ordering;
 shapes are rendered in the order they appear. Thus, by default, marks are
@@ -987,7 +987,7 @@ order in which they are rendered; however, the properties are still evaluated
 (i.e., built) in forward order.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1005,14 +1005,14 @@ order in which they are rendered; however, the properties are still evaluated
 					<b>right</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The right margin; the distance, in pixels, between the right edge of the
 enclosing panel and the right edge of this mark. Note that in some cases this
 property may be redundant with the left property, or with the conjunction of
 left and width.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1030,12 +1030,12 @@ left and width.
 					<b>root</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The root parent panel. This may be undefined for "offscreen" marks that are
 created for inheritance purposes only.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1053,7 +1053,7 @@ created for inheritance purposes only.
 					<b>scene</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The scene graph. The scene graph is an array of objects; each object (or
 "node") corresponds to an instance of this mark and an element in the data
 array. The scene graph can be traversed to lookup previously-evaluated
@@ -1088,7 +1088,7 @@ which refers to the top margin: the distance from the top edge of the panel
 to the top edge of the mark.)
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1119,12 +1119,12 @@ to the top edge of the mark.)
 					<b>title</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The title property; corresponds to the HTML/SVG title property, allowing the
 general of simple plain text tooltips.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1142,14 +1142,14 @@ general of simple plain text tooltips.
 					<b>top</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The top margin; the distance, in pixels, between the top edge of the
 enclosing panel and the top edge of this mark. Note that in some cases this
 property may be redundant with the bottom property, or with the conjunction
 of bottom and height.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1167,14 +1167,14 @@ of bottom and height.
 					<b>type</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The mark type; a lower camelCase name. The type name controls rendering
 behavior, and unless the rendering engine is extended, must be one of the
 built-in concrete mark types: area, bar, dot, image, label, line, panel,
 rule, or wedge.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1192,13 +1192,13 @@ rule, or wedge.
 					<b>visible</b>
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The visible property; a boolean determining whether or not the mark instance
 is visible. If a mark instance is not visible, its other properties will not
 be evaluated. Similarly, for panels no child marks will be rendered.
 						
 						
-					</p>
+					</div>
 					
 					
 
@@ -1224,12 +1224,12 @@ be evaluated. Similarly, for panels no child marks will be rendered.
 					<b>add</b>(type)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Adds a new mark of the specified type to the enclosing parent panel, whilst
 simultaneously setting the prototype of the new mark to be this mark.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1276,14 +1276,14 @@ simultaneously setting the prototype of the new mark to be this mark.
 					<b>anchor</b>(name)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns an anchor with the specified name. While anchor names are typically
 constants, the anchor name is a true property, which means you can specify a
 function to compute the anchor name dynamically. See the
 <a href="../symbols/pv.Anchor.html#name">pv.Anchor#name</a> property for details.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1322,7 +1322,7 @@ function to compute the anchor name dynamically. See the
 					<b>anchorTarget</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the anchor target of this mark, if it is derived from an anchor;
 otherwise returns null. For example, if a label is derived from a bar anchor,
 
@@ -1333,7 +1333,7 @@ then property functions on the label can refer to the bar via the
 defining properties on custom anchors.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1361,14 +1361,14 @@ defining properties on custom anchors.
 					<b>cousin</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the current instance in the scene graph of this mark, in the previous
 instance of the enclosing parent panel. May return null if this instance
 could not be found. See the <a href="../symbols/pv.Layout.stack.html">pv.Layout.stack</a> function for an example
 property function using cousin.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1403,7 +1403,7 @@ property function using cousin.
 					<b>def</b>(name, value)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Defines a local variable on this mark. Local variables are initialized once
 per mark (i.e., per parent panel instance), and can be used to store local
 state for the mark. Here are a few reasons you might want to use
@@ -1443,7 +1443,7 @@ is variable. In this scenario, you can use <tt>def</tt> to define a property;
 it will only get computed once per mark, rather than once per datum.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1482,7 +1482,7 @@ function.</dd>
 					<b>event</b>(type, handler)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Registers an event handler for the specified event type with this mark. When
 an event of the specified type is triggered, the specified handler will be
 invoked. The handler is invoked in a similar method to property functions:
@@ -1526,7 +1526,7 @@ specifying multiple event handlers for the same type, only the last one will
 be used.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1578,7 +1578,7 @@ be used.
 					<b>extend</b>(proto)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Sets the prototype of this mark to the specified mark. Any properties not
 defined on this mark may be inherited from the specified prototype mark, or
 its prototype, and so on. The prototype mark need not be the same type of
@@ -1586,7 +1586,7 @@ mark as this mark. (Note that for inheritance to be useful, properties with
 the same name on different mark types should have equivalent meaning.)
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1632,13 +1632,13 @@ the same name on different mark types should have equivalent meaning.)
 					<b>first</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the first instance of this mark in the scene graph. This method can
 only be called when the mark is bound to the scene graph (for example, from
 an event handler, or within a property function).
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1666,7 +1666,7 @@ an event handler, or within a property function).
 					<b>last</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the last instance of this mark in the scene graph. This method can
 only be called when the mark is bound to the scene graph (for example, from
 an event handler, or within a property function). In addition, note that mark
@@ -1674,7 +1674,7 @@ instances are built sequentially, so the last instance of this mark may not
 yet be constructed.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1702,13 +1702,13 @@ yet be constructed.
 					<b>mouse</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the current location of the mouse (cursor) relative to this mark's
 parent. The <i>x</i> coordinate corresponds to the left margin, while the
 <i>y</i> coordinate corresponds to the top margin.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1736,12 +1736,12 @@ parent. The <i>x</i> coordinate corresponds to the left margin, while the
 					<b>render</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Renders this mark, including recursively rendering all child marks if this is
 a panel.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1762,12 +1762,12 @@ a panel.
 					<b>sibling</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the previous instance of this mark in the scene graph, or null if
 this is the first instance.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1800,7 +1800,7 @@ this is the first instance.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:36 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>

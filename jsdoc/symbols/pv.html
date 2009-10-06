@@ -139,8 +139,8 @@ td.attributes, .fixedFont
 
 pre
 {
-  border-left: solid 10px #ddd;
-  padding-left: 1.5em;
+	border-left: solid 10px #ddd;
+	padding-left: 1.5em;
 }
 
 .summaryTable { margin-bottom: 8px; }
@@ -281,7 +281,7 @@ ul.inheritsList
 				The top-level Protovis namespace, <tt>pv</tt>.
 				
 				
-					<p><i>Defined in: </i> <a href="../symbols/src/pv.js.html">pv.js</a>.</p>
+					<br /><i>Defined in: </i> <a href="../symbols/src/pv.js.html">pv.js</a>.
 				
 			</p>
 
@@ -642,7 +642,7 @@ multiple of <tt>step</tt>.</div>
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">pv.<b><a href="../symbols/pv.html#.search">search</a></b>(array, value)
+								<div class="fixedFont">pv.<b><a href="../symbols/pv.html#.search">search</a></b>(array, value, f)
 								</div>
 								<div class="description">Searches the specified array of numbers for the specified value using the
 binary search algorithm.</div>
@@ -718,14 +718,14 @@ coordinate.</div>
 						<b>pv</b>
 				</div>
 				
-				<p class="description">
+				<div class="description">
 					The top-level Protovis namespace. All public methods and fields should be
 registered on this object. Note that core Protovis source is surrounded by an
 anonymous function, so any other declared globals will not be visible outside
 of core methods. This also allows multiple versions of Protovis to coexist,
 since each version will see their own <tt>pv</tt> namespace.
 					
-				</p>
+				</div>
 				
 				
 				
@@ -757,7 +757,7 @@ since each version will see their own <tt>pv</tt> namespace.
 					<span class="light">pv.</span><b>blend</b>(arrays)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Given the specified array of arrays, concatenates the arrays into a single
 array. If the individual arrays are explicitly known, an alternative to blend
 is to use JavaScript's <tt>concat</tt> method directly. These two equivalent
@@ -769,7 +769,7 @@ expressions:<ul>
 </ul>return [1, 2, 3, "a", "b", "c"].
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -809,7 +809,7 @@ expressions:<ul>
 					<span class="light">pv.</span><b>child</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns <tt>this.childIndex</tt>. This method is provided for convenience for
 use with scales. For example, to color bars by their child index, say:
 
@@ -819,7 +819,7 @@ This method is equivalent to <tt>function() this.childIndex</tt>, but more
 succinct.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -849,7 +849,7 @@ succinct.
 					<span class="light">pv.</span><b>color</b>(format)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the <a href="../symbols/pv.Color.html">pv.Color</a> for the specified color format string. Colors
 may have an associated opacity, or alpha channel. Color formats are specified
 by CSS Color Modular Level 3, using either in RGB or HSL color space. For
@@ -870,10 +870,11 @@ fully-transparent color.
 <p>If the <tt>format</tt> argument is already an instance of <tt>Color</tt>,
 the argument is returned with no further processing.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/color_Color.js.html">Color.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/color_Color.js.html">Color.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -922,7 +923,7 @@ keywords</a></dd>
 					<span class="light">pv.</span><b>colors</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a new categorical color encoding using the specified colors.  The
 arguments to this method are an array of colors; see <a href="../symbols/pv.html#.color">pv.color</a>. For
 example, to create a categorical color encoding using the <tt>species</tt>
@@ -934,10 +935,11 @@ The result of this expression can be used as a fill- or stroke-style
 property. This assumes that the data's <tt>species</tt> attribute is a
 string.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/color_Colors.js.html">Colors.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/color_Colors.js.html">Colors.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -983,7 +985,7 @@ string.
 					<span class="light">pv.</span><b>cross</b>(a, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Given two arrays <tt>a</tt> and <tt>b</tt>, <style
 type="text/css">sub{line-height:0}</style> returns an array of all possible
 pairs of elements [a<sub>i</sub>, b<sub>j</sub>]. The outer loop is on array
@@ -995,7 +997,7 @@ b<sub>m</sub>], ... [a<sub>n</sub>, b<sub>m</sub>]. If either array is empty,
 an empty array is returned.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1040,7 +1042,7 @@ an empty array is returned.
 					<span class="light">pv.</span><b>dict</b>(keys, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a map constructed from the specified <tt>keys</tt>, using the
 function <tt>f</tt> to compute the value for each key. The single argument to
 the value function is the key. The callback is invoked only for indexes of
@@ -1055,7 +1057,7 @@ The returned value is <tt>{one: 3, three: 5, seventeen: 9}</tt>. Accessor
 functions can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1100,14 +1102,14 @@ functions can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>entries</b>(map)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns all of the entries (key-value pairs) of the specified object (a
 map). The order of the returned array is not defined. Each key-value pair is
 represented as an object with <tt>key</tt> and <tt>value</tt> attributes,
 e.g., <tt>{key: "foo", value: 42}</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1146,14 +1148,15 @@ e.g., <tt>{key: "foo", value: 42}</tt>.
 					<span class="light">pv.</span><b>flatten</b>(map)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a <a href="../symbols/pv.Flatten.html">pv.Flatten</a> operator for the specified map. This is a
 convenience factory method, equivalent to <tt>new pv.Flatten(map)</tt>.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/data_Flatten.js.html">Flatten.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/data_Flatten.js.html">Flatten.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1199,13 +1202,14 @@ convenience factory method, equivalent to <tt>new pv.Flatten(map)</tt>.
 					<span class="light">pv.</span><b>hsl</b>(h, s, l, a)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Constructs a new HSL color with the specified values.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/color_Color.js.html">Color.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/color_Color.js.html">Color.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1262,13 +1266,13 @@ convenience factory method, equivalent to <tt>new pv.Flatten(map)</tt>.
 					<span class="light">pv.</span><b>identity</b>(x)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the passed-in argument, <tt>x</tt>; the identity function. This method
 is provided for convenience since it is used as the default behavior for a
 number of property functions.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1307,7 +1311,7 @@ number of property functions.
 					<span class="light">pv.</span><b>index</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns <tt>this.index</tt>. This method is provided for convenience for use
 with scales. For example, to color bars by their index, say:
 
@@ -1319,7 +1323,7 @@ accessor functions with <a href="../symbols/pv.html#.max">pv.max</a>, <a href=".
 utility methods.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1349,12 +1353,12 @@ utility methods.
 					<span class="light">pv.</span><b>keys</b>(map)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns all of the property names (keys) of the specified object (a map). The
 order of the returned array is not defined.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1400,11 +1404,11 @@ order of the returned array is not defined.
 					<span class="light">pv.</span><b>log</b>(x, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the logarithm with a given base value.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1449,14 +1453,14 @@ order of the returned array is not defined.
 					<span class="light">pv.</span><b>logAdjusted</b>(x, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Computes a zero-symmetric logarithm, with adjustment to values between zero
 and the logarithm base. This adjustment introduces distortion for values less
 than the base number, but enables simultaneous plotting of log-transformed
 data involving both positive and negative numbers.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1501,13 +1505,13 @@ data involving both positive and negative numbers.
 					<span class="light">pv.</span><b>logCeil</b>(x, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Rounds an input value up according to its logarithm. The method takes the
 ceiling of the logarithm of the value and then uses the resulting value as an
 exponent for the base value.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1552,13 +1556,13 @@ exponent for the base value.
 					<span class="light">pv.</span><b>logFloor</b>(x, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Rounds an input value down according to its logarithm. The method takes the
 floor of the logarithm of the value and then uses the resulting value as an
 exponent for the base value.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1603,13 +1607,13 @@ exponent for the base value.
 					<span class="light">pv.</span><b>logSymmetric</b>(x, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Computes a zero-symmetric logarithm. Computes the logarithm of the absolute
 value of the input, and determines the sign of the output according to the
 sign of the input value.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1654,14 +1658,14 @@ sign of the input value.
 					<span class="light">pv.</span><b>max</b>(array, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the maximum value of the specified array. If the specified array is
 not an array of numbers, an optional accessor function <tt>f</tt> can be
 specified to map the elements to numbers. See <a href="#normalize">#normalize</a> for an
 example. Accessor functions can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1706,7 +1710,7 @@ example. Accessor functions can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>mean</b>(array, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the arithmetic mean, or average, of the specified array. If the
 specified array is not an array of numbers, an optional accessor function
 <tt>f</tt> can be specified to map the elements to numbers. See
@@ -1714,7 +1718,7 @@ specified array is not an array of numbers, an optional accessor function
 <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1759,14 +1763,14 @@ specified array is not an array of numbers, an optional accessor function
 					<span class="light">pv.</span><b>median</b>(array, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the median of the specified array. If the specified array is not an
 array of numbers, an optional accessor function <tt>f</tt> can be specified
 to map the elements to numbers. See <a href="#normalize">#normalize</a> for an example.
 Accessor functions can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1811,14 +1815,14 @@ Accessor functions can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>min</b>(array, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the minimum value of the specified array of numbers. If the specified
 array is not an array of numbers, an optional accessor function <tt>f</tt>
 can be specified to map the elements to numbers. See <a href="#normalize">#normalize</a> for
 an example. Accessor functions can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1863,7 +1867,7 @@ an example. Accessor functions can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>naturalOrder</b>(a, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The comparator function for natural order. This can be used in conjunction with
 the built-in array <tt>sort</tt> method to sort elements by their natural
 order, ascending. Note that if no comparator function is specified to the
@@ -1871,7 +1875,7 @@ built-in <tt>sort</tt> method, the default order is lexicographic, <i>not</i>
 natural!
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1924,14 +1928,15 @@ href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objec
 					<span class="light">pv.</span><b>nest</b>(array)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a <a href="../symbols/pv.Nest.html">pv.Nest</a> operator for the specified array. This is a
 convenience factory method, equivalent to <tt>new pv.Nest(array)</tt>.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/data_Nest.js.html">Nest.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/data_Nest.js.html">Nest.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -1977,7 +1982,7 @@ convenience factory method, equivalent to <tt>new pv.Nest(array)</tt>.
 					<span class="light">pv.</span><b>normalize</b>(array, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a normalized copy of the specified array, such that the sum of the
 returned elements sum to one. If the specified array is not an array of
 numbers, an optional accessor function <tt>f</tt> can be specified to map the
@@ -1991,7 +1996,7 @@ not specified, the identity function is used. Accessor functions can refer to
 <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2036,7 +2041,7 @@ not specified, the identity function is used. Accessor functions can refer to
 					<span class="light">pv.</span><b>numerate</b>(keys, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a map from key to index for the specified <tt>keys</tt> array. For
 example,
 
@@ -2049,7 +2054,7 @@ function <tt>f</tt> can be specified to compute the string key for the given
 element. Accessor functions can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2094,7 +2099,7 @@ element. Accessor functions can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>parent</b>()
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns <tt>this.parent.index</tt>. This method is provided for convenience
 for use with scales. This method is provided for convenience for use with
 scales. For example, to color bars by their parent index, say:
@@ -2105,7 +2110,7 @@ Tthis method is equivalent to <tt>function() this.parent.index</tt>, but more
 succinct.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2135,7 +2140,7 @@ succinct.
 					<span class="light">pv.</span><b>permute</b>(array, indexes, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a permutation of the specified array, using the specified array of
 indexes. The returned array contains the corresponding element in
 <tt>array</tt> for each index in <tt>indexes</tt>, in order. For example,
@@ -2149,7 +2154,7 @@ to perform a simultaneous mapping of the array elements. Accessor functions
 can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2200,15 +2205,16 @@ can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>ramp</b>(start, end)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a linear color ramp from the specified <tt>start</tt> color to the
 specified <tt>end</tt> color. The color arguments may be specified either as
 <tt>string</tt>s or as <a href="../symbols/pv.Color.html">pv.Color</a>s.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/color_Ramp.js.html">Ramp.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/color_Ramp.js.html">Ramp.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2260,7 +2266,7 @@ specified <tt>end</tt> color. The color arguments may be specified either as
 					<span class="light">pv.</span><b>random</b>(min, max, step)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a random number in the range [<tt>min</tt>, <tt>max</tt>) that is a
 multiple of <tt>step</tt>. More specifically, the returned number is of the
 form <tt>min</tt> + <i>n</i> * <tt>step</tt>, where <i>n</i> is a nonnegative
@@ -2268,7 +2274,7 @@ integer. If <tt>step</tt> is not specified, it defaults to 1, returning a
 random integer if <tt>min</tt> is also an integer.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2312,7 +2318,7 @@ random integer if <tt>min</tt> is also an integer.
 					<span class="light">pv.</span><b>range</b>(start, stop, step)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns an array of numbers, starting at <tt>start</tt>, incrementing by
 <tt>step</tt>, until <tt>stop</tt> is reached. The stop value is exclusive. If
 only a single argument is specified, this value is interpeted as the
@@ -2323,7 +2329,7 @@ are specified, the step value is implied to be one.
 Python. See the Python documentation for more details.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2381,12 +2387,12 @@ Python. See the Python documentation for more details.
 					<span class="light">pv.</span><b>repeat</b>(a, n)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Concatenates the specified array with itself <i>n</i> times. For example,
 <tt>pv.repeat([1, 2])</tt> returns [1, 2, 1, 2].
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2431,7 +2437,7 @@ Python. See the Python documentation for more details.
 					<span class="light">pv.</span><b>reverseOrder</b>(a, b)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						The comparator function for reverse natural order. This can be used in
 conjunction with the built-in array <tt>sort</tt> method to sort elements by
 their natural order, descending. Note that if no comparator function is
@@ -2439,7 +2445,7 @@ specified to the built-in <tt>sort</tt> method, the default order is
 lexicographic, <i>not</i> natural!
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2491,13 +2497,14 @@ lexicographic, <i>not</i> natural!
 					<span class="light">pv.</span><b>rgb</b>(r, g, b, a)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Constructs a new RGB color with the specified channel values.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/color_Color.js.html">Color.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/color_Color.js.html">Color.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2551,10 +2558,10 @@ lexicographic, <i>not</i> natural!
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">pv.</span><b>search</b>(array, value)
+					<span class="light">pv.</span><b>search</b>(array, value, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Searches the specified array of numbers for the specified value using the
 binary search algorithm. The array must be sorted (as by the <tt>sort</tt>
 method) prior to making this call. If it is not sorted, the results are
@@ -2568,7 +2575,7 @@ than the specified value. Note that this guarantees that the return value
 will be nonnegative if and only if the value is found.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2587,6 +2594,12 @@ will be nonnegative if and only if the value is found.
 									
 								</dt>
 								<dd>the value to be searched for.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{function}</span> <b>f</b>
+									<i>Optional</i>
+								</dt>
+								<dd>an optional key function.</dd>
 							
 							</dl>
 						
@@ -2614,14 +2627,14 @@ otherwise, (-(<i>insertion point</i>) - 1).</dd>
 					<span class="light">pv.</span><b>sum</b>(array, f)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns the sum of the specified array. If the specified array is not an
 array of numbers, an optional accessor function <tt>f</tt> can be specified
 to map the elements to numbers. See <a href="#normalize">#normalize</a> for an example.
 Accessor functions can refer to <tt>this.index</tt>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2666,7 +2679,7 @@ Accessor functions can refer to <tt>this.index</tt>.
 					<span class="light">pv.</span><b>transpose</b>(arrays)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Given the specified array of arrays, <style
 type="text/css">sub{line-height:0}</style> transposes each element
 array<sub>ij</sub> with array<sub>ji</sub>. If the array has dimensions
@@ -2675,7 +2688,7 @@ after this method returns. This method transposes the elements of the array
 in place, mutating the array, and returning a reference to the array.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2714,14 +2727,15 @@ in place, mutating the array, and returning a reference to the array.
 					<span class="light">pv.</span><b>tree</b>(array)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a <a href="../symbols/pv.Tree.html">pv.Tree</a> operator for the specified array. This is a
 convenience factory method, equivalent to <tt>new pv.Tree(array)</tt>.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/data_Tree.js.html">Tree.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/data_Tree.js.html">Tree.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2767,12 +2781,12 @@ convenience factory method, equivalent to <tt>new pv.Tree(array)</tt>.
 					<span class="light">pv.</span><b>values</b>(map)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns all of the values (attribute values) of the specified object (a
 map). The order of the returned array is not defined.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2818,15 +2832,16 @@ map). The order of the returned array is not defined.
 					<span class="light">pv.</span><b>vector</b>(x, y)
 					
 					</div>
-					<p class="description">
+					<div class="description">
 						Returns a <a href="../symbols/pv.Vector.html">pv.Vector</a> for the specified <i>x</i> and <i>y</i>
 coordinate. This is a convenience factory method, equivalent to <tt>new
 pv.Vector(x, y)</tt>.
 						
-							<p><i>Defined in: </i> <a href="../symbols/src/data_Vector.js.html">Vector.js</a>.</p>
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/data_Vector.js.html">Vector.js</a>.
 						
 						
-					</p>
+					</div>
 					
 					
 					
@@ -2883,7 +2898,7 @@ pv.Vector(x, y)</tt>.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Sat Sep 19 2009 10:26:36 GMT-0700 (PDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.0 on Tue Oct 06 2009 09:59:02 GMT-0700 (PDT)
 		</div>
 	</body>
 </html>
